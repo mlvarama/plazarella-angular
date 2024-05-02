@@ -1,6 +1,139 @@
-<app-navbar/>
-<app-margin-navbar/>
+<app-navbar />
+<app-margin-navbar />
 
+<div class="parallax un-gran-centro flex items-center">
 
+  <div class="lg:pl-52 lg:text-left p-10 text-center text-white lg:w-2/3 w-full">
+    <h1 class="lg:text-5xl md:text-4xl text-3xl font-semibold uppercase">
+      ¡Un gran centro comercial para ti en San Francisco del Rincón!
+    </h1>
+    <p class="my-4 lg:text-xl">
+      Ven a Plazarella y ¡descubre la experiencia! Disfruta de un lugar con amplias instalaciones y
+      todo
+      lo
+      necesario
+      para ir de compras, degustar alguna bebida o comida y relajarte en el corazón de San Francisco
+      del
+      Rincón, Gto.
+    </p>
+    <app-generic-button textButton="Descubre mas"></app-generic-button>
+  </div>
+</div>
 
-<app-footer/>
+<div class="flex lg:flex-nowrap flex-wrap bg-black text-white text-center justify-center p-6">
+  <div class="flex flex-wrap justify-center p-10">
+    <img height="200px" width="200px" src="assets/Home/Mesa de trabajo 5.png" alt="">
+    <div>
+      <h1 class="text-3xl">
+        Ambiente Familiar
+      </h1>
+      <p>
+        Disfruta de un espacio acogedor y seguro donde grandes y pequeños encontrarán momentos de diversión y
+        entretenimiento para todos.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-wrap justify-center p-10">
+    <img height="200px" width="200px" src="assets/Home/Mesa de trabajo 6.png" alt="">
+    <div>
+      <h1 class="text-3xl">
+        Variedad en Compras
+      </h1>
+      <p>
+        Disfruta de un espacio acogedor y seguro donde grandes y pequeños encontrarán momentos de diversión y
+        entretenimiento para todos.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-wrap justify-center p-10">
+    <img height="200px" width="200px" src="assets/Home/Mesa de trabajo 7.png" alt="">
+    <div>
+      <h1 class="text-3xl">
+        Amplio Estacionamiento
+      </h1>
+      <p>
+        Disfruta de un espacio acogedor y seguro donde grandes y pequeños encontrarán momentos de diversión y
+        entretenimiento para todos.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-wrap align-items-center text-center justify-center m-4">
+  <h3 class="mb-5 w-full text-3xl text-yellow-600">
+    Te presentamos diversas áreas para tu deleite y diversión.
+  </h3>
+  <h2 class="lg:text-5xl text-3xl w-full m-5">
+    Un mundo de opciones en Plazarella
+  </h2>
+  <p class="mb-5 text-center w-full">
+    Te esperan experiencias inolvidables y momentos gratificantes. Ven y descubre todo lo que tenemos para
+    ofrecerte en un ambiente acogedor y vibrante que te invita a explorar, disfrutar y hacer tus compras con
+    estilo.
+  </p>
+
+  <div class="flex flex-wrap justify-center lg:w-2/3 w-full">
+    @for (card of arrayImages; track $index) {
+    <app-generi-card class="lg:w-1/3 p-3 w-full sm:w-1/2" nameImageCard="{{card.name}}"
+      routeImageCard="{{card.route}}"></app-generi-card>
+    }
+  </div>
+
+</div>
+
+<div class="parallax vive-la-experiencia h-[500px]">
+  <div class="parallax-container flex flex-wrap justify-center items-center">
+    <h3 class="mt-10 mb-10 lg:mt-20 lg:mb-0 w-full text-3xl text-yellow-600 text-center p-5">
+      ¡Vive la experiencia!
+    </h3>
+    <h3 class="w-full text-white text-center lg:lg:text-5xl text-3xl md:text-3xl mb-10 lg:mb-0 px-5">
+      Un mundo de compras, entretenimiento y sabores en un solo lugar
+    </h3>
+    <p class="text-white w-full text-center mb-10 lg:mb-0 px-5">Tenemos una amplia seleccion de tiendas de moda, hogar
+      salud y
+      entretenimiento
+      ademas de variadad de restaurantes para deleitar tu paladar
+    </p>
+    <a target="_blank"
+      href="https://www.google.com/maps/place/Plazarella/@21.0227793,-101.8504,17z/data=!3m1!4b1!4m6!3m5!1s0x842be851df348b5b:0x17ff2d7626886f52!8m2!3d21.0227793!4d-101.8504!16s%2Fg%2F1tn063cb?entry=ttu"
+      class="mb-32"><app-generic-button textButton="Visitanos"></app-generic-button></a>
+  </div>
+</div>
+
+<div class="flex flex-wrap my-10">
+  <div
+    class="flex flex-wrap items-center lg:justify-start lg:text-start text-center justify-center lg:pl-10 p-5 lg:w-2/3 w-full">
+    <h3 class="mb-5 w-full text-3xl text-yellow-600">Plazarella Kids Fest</h3>
+    <br>
+    <h3 class="lg:text-5xl text-3xl mb-5">En Plazarella podrás pasar momentos de convivencia y alegría inolvidables</h3>
+    <br>
+    <p class="pb-5">Tenemos eventos especiales para el disfrute de grandes y pequeños </p>
+    <a href=""><app-generic-button textButton="Ver más"></app-generic-button></a>
+
+  </div>
+  <div class="flex lg:w-1/3 w-full">
+    <img src="assets/Home/PlazarellaKidsFest.png" alt="Fest kids" class="imgKids">
+  </div>
+</div>
+
+<div class="parallax descubre-magia h-[700px]">
+  <div
+    class="parallax-container p-10 flex flex-wrap justify-center items-center text-center text-white">
+    <h3 class="mb-5 w-full text-3xl text-yellow-600 mt-10">
+      Descubre la magia que aguarda en cada rincón de nuestra Plaza Comercial
+    </h3>
+    <h3 class="text-center mb-3 lg:text-5xl text-3xl w-full">Conoce y Vive la Experiencia Plazarella: <br> Un Mundo de
+      Emociones en un
+      Solo Lugar</h3>
+    <p class="mb-10 lg:mb-0">Plazarella es un lugar encantador ubicado en un punto
+      céntrico de la ciudad de San Francisco del Rincón,
+      en el estado de Guanajuato. Esta plaza es un punto de encuentro popular para residentes y
+      visitantes por igual,
+      y está repleta de actividades y atracciones que la convierten en un lugar especial para explorar.
+    </p>
+    <a  class="mb-32"
+      href="https://www.google.com/maps/place/Plazarella/@21.0227793,-101.8504,17z/data=!3m1!4b1!4m6!3m5!1s0x842be851df348b5b:0x17ff2d7626886f52!8m2!3d21.0227793!4d-101.8504!16s%2Fg%2F1tn063cb?entry=ttu"><app-generic-button
+        textButton="Ir al mapa"></app-generic-button></a>
+  </div>
+</div>
+<app-footer />
