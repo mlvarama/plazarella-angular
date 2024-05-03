@@ -1,0 +1,19 @@
+
+<app-navbar/>
+<app-margin-navbar/>
+<app-generic-banner [title]="'Galería'"/>
+
+<div class="flex justify-center items-center my-8">
+    <div class="grid gap-4 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 max-w-screen-2xl ">
+        @if(galeryResults$ | async; as results){
+            @if(results.success){
+                @for (item of results.data; track $index) {
+                    <app-galery-frame [data]="item"/>           
+                }
+            }
+        }
+    </div>
+</div>
+
+<app-footer/>
+<router-outlet/>
