@@ -12,10 +12,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/rou
 })
 export class GaleryFrameComponent {
   @Input() data: GaleryFrame;
-
+  @Input() hasButton: boolean = true;
   constructor (private router: Router){}
 
-  goToGalery(name: string, id: number){
-    this.router.navigate(['/galerias', name, id]);
-  }
 }

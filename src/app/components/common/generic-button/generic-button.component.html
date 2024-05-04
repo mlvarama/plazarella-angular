@@ -1,3 +1,10 @@
-<button type="button" class="text-white bg-[#050708] hover:bg-yellow-600 lg:text-lg text-sm rounded-xl px-5 py-2.5 text-center inline-flex items-center me-2 mb-2 hover:transition hover:duration-50 border border-white">
-  {{ textButton }}
-</button>
+@if (route){
+  <a routerLink="{{route}}" class="text-white bg-[#050708] hover:bg-yellow-600 lg:text-lg text-sm rounded-3xl px-5 py-2.5 text-center inline-flex items-center me-2 mb-2 hover:transition hover:duration-200 outline outline-2 outline-white outline-offset-[-5px]">
+    {{textButton}}
+  </a>
+}@else {
+  <button type="button" 
+  class="text-white bg-[#050708] hover:bg-yellow-600 lg:text-lg text-sm rounded-3xl px-5 py-2.5 text-center inline-flex items-center me-2 mb-2 hover:transition hover:duration-200 outline outline-2 outline-white outline-offset-[-5px]">
+    {{ textButton }}
+  </button>
+}

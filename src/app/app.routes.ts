@@ -4,7 +4,22 @@ import { GaleryComponent } from './views/galery/galery.component';
 import { ShowGaleryComponent } from './views/show-galery/show-galery.component';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'galerias', component: GaleryComponent},
-    {path: 'galerias/:name/:id', component: ShowGaleryComponent},
+    {
+        path: '', 
+        loadComponent: () => import('./views/home/home.component').then(h => h.HomeComponent), 
+        title: 'Plazarella',
+    },
+    {
+        path: 'galerias', 
+        loadChildren: ()=> import('./core/routes/galery.routes').then(r => r.GALLERY_ROUTES)
+    },
+    {
+        path: 'promociones',
+        loadComponent: () => import('./views/promos/promos.component').then(c => c.PromosComponent),
+        title: 'Promociones'
+    }, 
+    {
+        path: '**',
+        redirectTo: '/'
+    }
 ];
