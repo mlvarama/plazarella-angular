@@ -1,23 +1,22 @@
-<app-navbar/>
-<app-margin-navbar/>
+<app-navbar />
+<app-margin-navbar />
 @if (galeryResults$ | async;as results){
     @if(results.success){
-        <app-generic-banner [title]="results.data.galery.name"/>
-
-            <div class="flex justify-center items-center my-8">
-                <div class="grid gap-4 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 max-w-screen-2xl ">
-                    @for (item of galeryFrames; track $index) {
-                        <div class="flex justify-center items-center flex-col gap-2">
-                            <app-galery-frame [hasButton]="false" [data]="item" (click)="open($index)"/>
-                            <app-generic-button [textButton]="'VER FOTO'" (click)="open($index)"/>
-                        </div>
-                    }
-                </div>
+    <app-generic-banner [title]="results.data.galery.name" />
+    <div class="flex justify-center items-center my-8">
+        <div class="grid gap-4 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 max-w-screen-2xl ">
+            @for (item of galeryFrames; track $index) {
+            <div class="flex justify-center items-center flex-col gap-2">
+                <app-galery-frame [hasButton]="false" [data]="item" (click)="open($index)" />
+                <app-generic-button [textButton]="'VER FOTO'" (click)="open($index)" />
             </div>
+            }
+        </div>
+    </div>
     }@else {
-        <app-generic-banner [title]="'Error'"/>
+    <app-generic-banner [title]="'Error'" />
     }
 }
 
-<app-footer/>
-<router-outlet/>
+<app-footer />
+<router-outlet />

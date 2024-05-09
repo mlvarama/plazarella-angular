@@ -1,5 +1,31 @@
 <app-navbar/>
 <app-margin-navbar/>
 <app-generic-banner [title]="'Promociones'"/>
-<p>promos works!</p>
+
+<div class="flex justify-center items-center my-8 flex-col">
+    @if (promosResults$ | async; as results){
+        @if(results.success){
+            @if (results.data.length > 0) {
+                <h3 class="text-center text-black font-bold text-xl">En Plazarella tenemos las mejores promociones, visita esta sección frecuentemente para enterarte de las últimas ofertas.</h3>
+                <h3 class="text-center text-black font-bold text-lg mb-8">(Promociones sujetas a cambio sin previo aviso.)</h3>
+                <div class="grid gap-4 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 max-w-screen-2xl ">
+                    @for (item of promosFrames; track $index) {
+                        <div class="flex justify-center items-center flex-col gap-2">
+                            <app-galery-frame [hasButton]="false" [data]="item" (click)="open($index)"/>
+                            <app-generic-button [textButton]="'Visita ' + results.data[$index].shopName" [route]=""/>
+                        </div>
+                    }
+                </div>
+            }@else {
+                <img src="assets/Home/PLAZARELLA.png" class="w-[300px]" alt="">
+                <h2 class="text-center text-black font-bold text-3xl">Espera nuestras próximas promociones</h2>
+                <br>
+                <h3 class="text-center text-black font-bold text-xl">En Plazarella tenemos las mejores promociones, visita esta sección frecuentemente para enterarte de las últimas ofertas.</h3>
+                <h3 class="text-center text-black font-bold text-lg">(Promociones sujetas a cambio sin previo aviso.)</h3>
+            }
+        }
+    }
+</div>
+
+
 <app-footer/>

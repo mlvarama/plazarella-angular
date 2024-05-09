@@ -1,0 +1,27 @@
+<div class="w-full flex flex-col justify-center items-center px-8">
+    <h3 class="text-2xl bg-[#d4a237] text-white font-bold rounded-lg p-2">{{title}}</h3>
+    <div class="mb-8 text-2xl text-[#d4a237] flex">
+        <div class="">
+            <fa-icon [icon]="icon" />
+        </div>
+        <div class="mt-1">
+            <fa-icon [icon]="icon" />
+        </div>
+        <div class="">
+            <fa-icon [icon]="icon" />
+        </div>
+    </div>
+    @for (item of data; track $index) {
+        <div class="flex justify-center items-start flex-col w-11/12 space-y-2 mb-8">
+            <div>
+                <div class="aspect-video w-full">
+                    <a class="w-full h-ful" href="">
+                        <img src="{{ENV + item.image}}" alt=" {{item.imageName}} " class="w-full h-full object-cover rounded-lg hover:transition hover:duration-500 shadow-md shadow-slate-500 hover:shadow-lg hover:shadow-slate-500">
+                    </a>
+                </div>
+            </div>
+            <a href=""><h4 class="text-xl font-bold"><span class="text-[#d4a237]"> {{item.categoryName}} </span> {{item.title}} </h4></a>
+            <app-generic-button [textButton]="'Leer Más'" [route]="['/blog', item.id, item.URL]" />
+        </div>
+    }
+</div>

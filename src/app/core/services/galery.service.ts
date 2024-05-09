@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GaleryFrame, GaleryDetail } from '../../interfaces/galery';
 import { environment } from '../../../environments/environment';
-import { GeneralResponse } from '../../interfaces/GeneralResponse';
+import { GeneralResponse } from '../../interfaces/common';
 
 @Injectable({
   providedIn: 'root'

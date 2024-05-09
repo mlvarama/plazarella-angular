@@ -1,0 +1,14 @@
+<!-- <div class="flex items-start justify-start space-x-4 w-full"> -->
+<div class="grid lg:grid-cols-4 grid-cols-1 w-full gap-4">
+    <div class="col-span-1 aspect-square shadow-lg hover:transition hover:duration-500 hover:shadow-2xl shadow-slate-200 hover:shadow-slate-500 rounded-lg">
+        <a [routerLink]="['/blog', data.postId, data.URL]" class="w-full h-full">
+            <img src="{{ENV + data.image}}" alt="{{data.imageName}}" class="object-cover w-full h-full rounded-lg">
+        </a>
+    </div>
+    <div class="flex flex-col justify-start items-start space-y-2 col-span-3">
+        <a [routerLink]="['/blog', data.postId, data.URL]"><h2 class="text-2xl text-black font-bold "><span class="text-[#d4a237]">{{data.createdAt}}</span> {{data.postName}}</h2></a>
+        <h3 class="text-xl font-bold text-black">{{data.categoryName}}</h3>
+        <p>{{data.abstract}}</p>
+        <app-generic-button [textButton]="'Leer Más'" [route]="['/blog', data.postId, data.URL]" />
+    </div>
+</div>

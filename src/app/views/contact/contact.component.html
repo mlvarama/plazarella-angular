@@ -1,0 +1,103 @@
+<app-navbar />
+<app-margin-navbar />
+<app-generic-banner [title]="'Contacto'" />
+
+<div class="w-full flex items-center justify-center">
+    <div
+        class="w-full max-w-screen-2xl p-4 grid grid-cols-1 lg:grid-cols-2 lg:space-x-4 space-x-0 space-y-4 lg:space-y-0">
+        <form [formGroup]="contactForm" (ngSubmit)="submitData()"
+            class="w-full h-full p-8 items-center justify-center bg-black rounded hover:transition space-y-12 hover:duration-300 hover:shadow-lg hover:shadow-gray-600">
+            <p class="text-white text-center font-bold text-2xl mb-4">FORMULARIO DE CONTACTO</p>
+            <div class="flex items-center justify-center w-full">
+                <div class="relative w-full">
+                    <input id="name" name="name" type="text" formControlName="name" required placeholder="Nombre*"
+                        class="border-b focus:placeholder:text-black placeholder:text-white border-gray-300 py-1 focus:border-2 focus:rounded focus:border-yellow-600 transition-colors focus:outline-none peer bg-inherit w-full text-white" />
+                    <label for="name"
+                        class="absolute left-0 text-transparent top-1 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-yellow-600">Nombre</label>
+                </div>
+            </div>
+            <div class="flex items-center justify-center w-full">
+                <div class="relative w-full">
+                    <input id="phone" name="phone" type="number" formControlName="phone" required
+                        placeholder="Teléfono*"
+                        class="border-b focus:placeholder:text-black placeholder:text-white border-gray-300 py-1 focus:border-2 focus:rounded focus:border-yellow-600 transition-colors focus:outline-none peer bg-inherit w-full text-white" />
+                    <label for="phone"
+                        class="absolute left-0 text-transparent top-1 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-yellow-600">Teléfono</label>
+                </div>
+            </div>
+            <div class="flex items-center justify-center w-full">
+                <div class="relative w-full">
+                    <input id="subject" name="subject" type="text" formControlName="subject" required
+                        placeholder="Asunto*"
+                        class="border-b focus:placeholder:text-black placeholder:text-white border-gray-300 py-1 focus:border-2 focus:rounded focus:border-yellow-600 transition-colors focus:outline-none peer bg-inherit w-full text-white" />
+                    <label for="subject"
+                        class="absolute left-0 text-transparent top-1 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-yellow-600">Asunto</label>
+                </div>
+            </div>
+            <div class="flex items-center justify-center w-full">
+                <div class="relative w-full">
+                    <input id="email" name="email" type="text" formControlName="email" required placeholder="Correo*"
+                        class="border-b focus:placeholder:text-black placeholder:text-white border-gray-300 py-1 focus:border-2 focus:rounded focus:border-yellow-600 transition-colors focus:outline-none peer bg-inherit w-full text-white" />
+                    <label for="email"
+                        class="absolute left-0 text-transparent top-1 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-yellow-600">Correo</label>
+                </div>
+            </div>
+            <div class="flex items-center justify-center w-full">
+                <div class="relative w-full">
+                    <textarea id="message" name="message" type="text" formControlName="message" required
+                        placeholder="Mensaje*"
+                        class="border-b focus:placeholder:text-black placeholder:text-white border-gray-300 py-1 focus:border-2 focus:rounded focus:border-yellow-600 transition-colors focus:outline-none peer bg-inherit w-full text-white resize-none h-24"></textarea>
+                    <label for="message"
+                        class="absolute left-0 text-transparent top-1 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-yellow-600">Mensaje</label>
+                </div>
+            </div>
+            <div class="flex space-x-4 items-center">
+                <button type="submit" [disabled]="!contactForm.valid || sending"
+                    class="mt-4 text-white bg-[#050708] hover:bg-yellow-600 lg:text-lg text-sm rounded-3xl px-5 py-2.5 text-center inline-flex items-center me-2 mb-2 disabled:hover:bg-inherit disabled:hover:text-gray-500 disabled:text-gray-500 hover:transition hover:duration-200 outline outline-2 outline-white outline-offset-[-5px]">
+                    ENVIAR
+                </button>
+                @if (sending) {
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#ffffff" height="32px" width="32px"
+                    class="animate-spin"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                    <path
+                        d="M222.7 32.1c5 16.9-4.6 34.8-21.5 39.8C121.8 95.6 64 169.1 64 256c0 106 86 192 192 192s192-86 192-192c0-86.9-57.8-160.4-137.1-184.1c-16.9-5-26.6-22.9-21.5-39.8s22.9-26.6 39.8-21.5C434.9 42.1 512 140 512 256c0 141.4-114.6 256-256 256S0 397.4 0 256C0 140 77.1 42.1 182.9 10.6c16.9-5 34.8 4.6 39.8 21.5z" />
+                </svg>
+                }
+                @if(response?.success && sent){
+                <p class="text-white">Enviado con éxito</p>
+                } @else if (!response?.success && sent) {
+                <p class="text-white">Error al enviar</p>
+                }
+            </div>
+            <div class="flex items-start justify-between w-full">
+                <div class="flex space-x-4 items-start w-2/3">
+                    <fa-icon class="text-[30px] text-white" [icon]="phoneIcon" />
+                    <div class="flex flex-col space-y-4">
+                        <p class="text-white" style="margin:0;">Teléfono:</p>
+                        <p class="text-white" style="margin:0;">01 476 743 5045</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4 items-start w-2/3">
+                    <fa-icon class="text-[30px] text-white" [icon]="mapIcon" />
+                    <div class="flex flex-col space-y-4">
+                        <p class="text-white" style="margin:0;">Ubicación:</p>
+                        <p class="text-white" style="margin:0;">Aquiles Serdán #200 C.P. 36300
+                            San Francisco del Rincón,
+                            Guanajuato, México.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="w-full lg:h-full h-[300px] hover:transition hover:duration-300 hover:shadow-lg hover:shadow-gray-600">
+            <iframe class="w-full h-full rounded"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14896.990138551477!2d-101.8504!3d21.0227793!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842be851df348b5b%3A0x17ff2d7626886f52!2sPlazarella!5e0!3m2!1ses-419!2smx!4v1701881896836!5m2!1ses-419!2smx"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+    </div>
+
+</div>
+
+<app-footer />

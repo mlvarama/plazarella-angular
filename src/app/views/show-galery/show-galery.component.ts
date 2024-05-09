@@ -3,7 +3,7 @@ import { BodyModule } from '../../common/body/body.module';
 import { GaleryService } from '../../core/services/galery.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { GeneralResponse } from '../../interfaces/GeneralResponse';
+import { GeneralResponse } from '../../interfaces/common';
 import { GaleryDetail, GaleryFrame, LightBoxItem } from '../../interfaces/galery';
 import { GaleryFrameComponent } from '../../components/galery/galery-frame/galery-frame.component';
 import { environment } from '../../../environments/environment.development';
@@ -19,7 +19,6 @@ import { Title } from '@angular/platform-browser';
 })
 export class ShowGaleryComponent implements OnInit {
 
-  private route = inject(ActivatedRoute);
 
   galeryResults$!: Observable<GeneralResponse<GaleryDetail>>;
   

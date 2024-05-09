@@ -1,0 +1,41 @@
+<app-navbar/>
+<app-margin-navbar/>
+<app-generic-banner [title]="'Blog'"/>
+
+<div class="w-full flex items-center justify-center mt-16 p-8">
+    <div class="w-full max-w-screen-2xl flex items-start flex-col lg:flex-row justify-around lg:divide-x-2">
+        <div class="flex lg:w-3/5 w-full flex-col items-start justify-center space-y-16">
+            
+            @if(blogPaginationData$ | async; as results){
+                <div class="flex w-full space-x-4 items-center justify-between">
+                    <app-pagination [data]="data" [baseRute]="'/blog'"/>
+                    <form [formGroup]="searchForm" (ngSubmit)="search()" class="flex items-center border p-1 rounded-lg">   
+                        <div class="relative w-full">
+                            <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full h-8 p-2"  formControlName="busqueda" />
+                        </div>
+                        <button [disabled]="!searchForm.valid" type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-black rounded-lg border  hover:transition hover:duration-500 hover:bg-[#d4a237] disabled:bg-gray-400 hover:disabled:bg-gray-400 ">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                @if(results.data.totalRegisters > 0){
+                    @for (item of blogEntrances; track $index) {
+                        <app-blog-entrance [data]="item"/>
+                    }
+                }@else {
+                    <p class="text-2xl font-bold">No se encontraron resultados a su búsqueda</p>
+                }
+            }
+        </div>
+
+        <div class="flex lg:w-1/3 w-full flex-col items-center justify-center mt-8 lg:mt-0">
+            @if (featuredBlogData$ | async; as results) {
+                <app-blog-card class="w-full" [title]="'Notas Destacadas'" [data]="results.data" />
+            }
+        </div>
+    </div>
+</div>
+
+<app-footer/>
