@@ -5,6 +5,6 @@ import { DirectoryDetailComponent } from "../../views/directory-detail/directory
 
 export const DIRECTORY_ROUTES: Routes = [
   { path: '', component: DirectoryComponent, pathMatch: 'full', title: 'Directorio' },
-  { path: 'tienda', component: DirectoryDetailComponent },
+  { path: 'shop', component: DirectoryDetailComponent, pathMatch: 'full' },
   { path: ':id', component: DirectoryComponent },
 ];

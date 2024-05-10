@@ -27,7 +27,7 @@ export class NavbarComponent {
     if (this.menuMobileHiddden){
       menuMobile.classList.remove('flex');
       menuMobile.classList.remove('animate__fadeInDown');
-      
+
       menuMobile.classList.add('animate__fadeOutUp');
       await new Promise((resolve) => setTimeout(resolve, 1000));
       menuMobile.classList.add('hidden');

@@ -1,14 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BodyModule } from '../../common/body/body.module';
 import { Observable, map } from 'rxjs';
-import { GeneralResponse } from '../../interfaces/GeneralResponse';
+import { GeneralResponse } from '../../interfaces/common';
 import { CategoryButtonFrame, DirectoryFrame } from '../../interfaces/directory';
 import { DirectoryService } from '../../core/services/directory.service';
 import { environment } from '../../../environments/environment';
 import { DirectoryFrameComponent } from '../../components/directory/directory-frame/directory-frame.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { relative } from 'path';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-directory',
   standalone: true,
@@ -21,7 +19,7 @@ export class DirectoryComponent implements OnInit {
   categoriesResults$!: Observable<GeneralResponse<CategoryButtonFrame[]>>;
   @Input() id = '';
 
-  constructor(private service: DirectoryService, private router: Router, private route: ActivatedRoute) {
+  constructor(private service: DirectoryService, private router: Router) {
 
   }
 
@@ -37,7 +35,7 @@ export class DirectoryComponent implements OnInit {
       })
     );
 
-    this.categoriesResults$ = this.service.getBussinesActive()
+    this.categoriesResults$ = this.service.getBussinesActive();
 
   }
 

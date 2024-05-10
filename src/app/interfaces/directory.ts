@@ -10,7 +10,7 @@ export interface CategoryButtonFrame {
   name?: string;
 }
 
-interface Shop {
+export interface Shop {
   name: string;
   description: string;
   phone: string;
@@ -21,12 +21,12 @@ interface Shop {
   address: string;
 }
 
-interface Photo {
+export interface Photo {
   name: string;
   image: string;
 }
 
-interface ShopData {
+export interface ShopData {
   shop: Shop;
   photos: Photo[];
 }
