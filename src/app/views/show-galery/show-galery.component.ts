@@ -1,14 +1,13 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { BodyModule } from '../../common/body/body.module';
 import { GaleryService } from '../../core/services/galery.service';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { GeneralResponse } from '../../interfaces/common';
 import { GaleryDetail, GaleryFrame, LightBoxItem } from '../../interfaces/galery';
 import { GaleryFrameComponent } from '../../components/galery/galery-frame/galery-frame.component';
 import { environment } from '../../../environments/environment.development';
 import { Lightbox, LightboxModule } from 'ngx-lightbox';
-import { Title } from '@angular/platform-browser';
+import { MetadataService } from '../../core/services/meta-tags-manager.service';
 
 @Component({
   selector: 'app-show-galery',
@@ -19,27 +18,26 @@ import { Title } from '@angular/platform-browser';
 })
 export class ShowGaleryComponent implements OnInit {
 
-
+  ENV: string = environment.api;
   galeryResults$!: Observable<GeneralResponse<GaleryDetail>>;
   
   lightBoxAlbum: any[] = [];
   galeryFrames: GaleryFrame [] = [];
   
 
-  constructor(private service: GaleryService, private lightBox: Lightbox, private title: Title){}
+  constructor(private service: GaleryService, private lightBox: Lightbox, private metaData: MetadataService){}
 
   @Input() id = ''; 
 
   ngOnInit(): void{
     this.galeryResults$ = this.service.getGaleryDetailById(Number(this.id)).pipe(map(
       value => {
+        this.metaData.updateMetadata({
+          title: value.data.galery.name,
+          image: this.ENV + value.data.photos[0].image
+        })
         
-        this.title.setTitle(value.data.galery.name)
         value.data.photos.forEach(photo => {
-          if (!photo.image.startsWith(environment.api)){
-            photo.image = `${environment.api}${photo.image}`;
-          }
-
           const lightBoxItem: LightBoxItem = {
             src: photo.image,
             caption: photo.name,

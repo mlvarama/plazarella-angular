@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GeneralResponse } from '../../interfaces/GeneralResponse';
+import { GeneralResponse } from '../../interfaces/common';
 import { CategoryButtonFrame, DirectoryFrame } from '../../interfaces/directory';
 import { environment } from '../../../environments/environment';
 

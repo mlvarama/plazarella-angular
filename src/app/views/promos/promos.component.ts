@@ -4,10 +4,10 @@ import { PromosService } from '../../core/services/promos.service';
 import { Observable, map } from 'rxjs';
 import { GeneralResponse } from '../../interfaces/common';
 import { ActivePromo } from '../../interfaces/promos';
-import { environment } from '../../../environments/environment.development';
 import { GaleryFrameComponent } from '../../components/galery/galery-frame/galery-frame.component';
 import { GaleryFrame, LightBoxItem } from '../../interfaces/galery';
 import { Lightbox, LightboxModule } from 'ngx-lightbox';
+import { MetadataService } from '../../core/services/meta-tags-manager.service';
 
 @Component({
   selector: 'app-promos',
@@ -22,16 +22,12 @@ export class PromosComponent implements OnInit{
   lightBoxAlbum: any[] = [];
   promosFrames: GaleryFrame [] = [];
 
-  constructor(private service: PromosService, private lightBox: Lightbox,){}
+  constructor(private service: PromosService, private lightBox: Lightbox, private metaData: MetadataService){}
 
   ngOnInit(): void {
     this.promosResults$ = this.service.getActivePromos().pipe(map(
       value => {
         value.data.forEach(item =>{
-          if (!item.image.startsWith(environment.api)){
-            item.image = environment.api + item.image;
-          }
-
           const lightBoxItem: LightBoxItem = {
             src: item.image,
             caption: item.name,
@@ -48,6 +44,10 @@ export class PromosComponent implements OnInit{
         return value;
       }
     ));
+
+    this.metaData.updateMetadata({
+      title: 'Promociones'
+    })
   }
 
   open(index):void {

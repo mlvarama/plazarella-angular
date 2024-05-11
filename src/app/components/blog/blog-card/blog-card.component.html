@@ -1,14 +1,16 @@
-<div class="w-full flex flex-col justify-center items-center px-8">
-    <h3 class="text-2xl bg-[#d4a237] text-white font-bold rounded-lg p-2">{{title}}</h3>
-    <div class="mb-8 text-2xl text-[#d4a237] flex">
-        <div class="">
-            <fa-icon [icon]="icon" />
-        </div>
-        <div class="mt-1">
-            <fa-icon [icon]="icon" />
-        </div>
-        <div class="">
-            <fa-icon [icon]="icon" />
+<div class="w-full flex flex-col justify-center items-center lg:px-8">
+    <div class="flex flex-col justify-center items-center animate-bounce rounded-3xl border-2 border-[#d4a237] mb-8 p-4">
+        <h3 class="text-2xl bg-[#d4a237] text-white font-bold rounded-lg p-2">{{title}}</h3>
+        <div class="text-2xl text-[#d4a237] flex">
+            <div class="">
+                <fa-icon [icon]="icon" />
+            </div>
+            <div class="mt-1">
+                <fa-icon [icon]="icon" />
+            </div>
+            <div class="">
+                <fa-icon [icon]="icon" />
+            </div>
         </div>
     </div>
     @for (item of data; track $index) {
