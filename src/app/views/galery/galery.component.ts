@@ -5,8 +5,8 @@ import { Observable, map } from 'rxjs';
 import { GaleryFrame } from '../../interfaces/galery';
 import { GeneralResponse } from '../../interfaces/common';
 import { GaleryFrameComponent } from '../../components/galery/galery-frame/galery-frame.component';
-import { environment } from '../../../environments/environment';
 import { BodyModule } from '../../common/body/body.module';
+import { MetadataService } from '../../core/services/meta-tags-manager.service';
 
 @Component({
   selector: 'app-galery',
@@ -19,19 +19,14 @@ export class GaleryComponent implements OnInit{
 
   galeryResults$!: Observable<GeneralResponse<GaleryFrame[]>>;
 
-  constructor (private service: GaleryService){}
+  constructor (private service: GaleryService, private metaData: MetadataService){}
 
   ngOnInit(): void {
-    this.galeryResults$ = this.service.getGaleryList().pipe(
-      map(element => {
-        element.data.forEach(item => {
-          if (!item.photo.startsWith(environment.api)){
-            item.photo = environment.api + item.photo;
-          }
-        })
-        return element;
-      })
-    );
+    this.galeryResults$ = this.service.getGaleryList();
+
+    this.metaData.updateMetadata({
+      title: 'Galería'
+    })
   }
 
 }

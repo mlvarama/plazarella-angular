@@ -9,6 +9,7 @@ import { PaginationComponent } from '../../components/common/pagination/paginati
 import { Observable, map } from 'rxjs';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BlogCardComponent } from '../../components/blog/blog-card/blog-card.component';
+import { MetadataService } from '../../core/services/meta-tags-manager.service';
 
 @Component({
   selector: 'app-blog',
@@ -19,7 +20,7 @@ import { BlogCardComponent } from '../../components/blog/blog-card/blog-card.com
 })
 export class BlogComponent implements OnInit{
   
-  constructor(private service: BlogService, private route: ActivatedRoute, private router: Router){ }
+  constructor(private service: BlogService, private route: ActivatedRoute, private router: Router, private metaService: MetadataService){ }
 
   blogPaginationData$!: Observable<GeneralResponse<PaginationRows<BlogEntrance[]>>>;
   featuredBlogData$!: Observable<GeneralResponse<FeaturedBlog[]>>;
@@ -30,6 +31,9 @@ export class BlogComponent implements OnInit{
   });
 
   ngOnInit() {
+    this.metaService.updateMetadata({
+      title: 'Blog'
+    })
     const pagina: string = this.route.snapshot.queryParamMap.get('pagina');
     const busqueda: string = this.route.snapshot.queryParamMap.get('busqueda');
     const request = {

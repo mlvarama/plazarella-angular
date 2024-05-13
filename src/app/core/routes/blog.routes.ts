@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
-import path from "path";
 import { BlogComponent } from "../../views/blog/blog.component";
+import { BlogDetailComponent } from "../../views/blog-detail/blog-detail.component";
 
 export const BLOG_ROUTES: Routes = [
     {
@@ -9,7 +9,7 @@ export const BLOG_ROUTES: Routes = [
         title: 'Blog'
     },
     {
-        path: ':id',
-        component: BlogComponent
+        path: ':id/:name',
+        component: BlogDetailComponent
     }
 ]

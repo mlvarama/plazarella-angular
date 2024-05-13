@@ -6,7 +6,10 @@ import { CategoryButtonFrame, DirectoryFrame } from '../../interfaces/directory'
 import { DirectoryService } from '../../core/services/directory.service';
 import { environment } from '../../../environments/environment';
 import { DirectoryFrameComponent } from '../../components/directory/directory-frame/directory-frame.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { relative } from 'path';
+import { MetadataService } from '../../core/services/meta-tags-manager.service';
+
 @Component({
   selector: 'app-directory',
   standalone: true,
@@ -19,7 +22,7 @@ export class DirectoryComponent implements OnInit {
   categoriesResults$!: Observable<GeneralResponse<CategoryButtonFrame[]>>;
   @Input() id = '';
 
-  constructor(private service: DirectoryService, private router: Router) {
+  constructor(private service: DirectoryService, private router: Router, private route: ActivatedRoute, private metaData: MetadataService) {
 
   }
 
@@ -35,11 +38,15 @@ export class DirectoryComponent implements OnInit {
       })
     );
 
-    this.categoriesResults$ = this.service.getBussinesActive();
 
+    this.categoriesResults$ = this.service.getBussinesActive()
+
+    this.metaData.updateMetadata({
+      title: 'Directorio'
+    })
   }
 
-  resetPage(itemId: number) { // Assuming item.id is a number
+  resetPage(itemId: number) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/directorio'], { queryParams: { id: itemId }, queryParamsHandling: 'merge' });
     });

@@ -2,14 +2,14 @@
 <app-margin-navbar/>
 <app-generic-banner [title]="'Blog'"/>
 
-<div class="w-full flex items-center justify-center mt-16 p-8">
+<div class="w-full flex items-center justify-center p-8">
     <div class="w-full max-w-screen-2xl flex items-start flex-col lg:flex-row justify-around lg:divide-x-2">
-        <div class="flex lg:w-3/5 w-full flex-col items-start justify-center space-y-16">
+        <div class="flex lg:w-3/5 w-full flex-col items-start justify-center lg:space-y-16 space-y-8">
             
             @if(blogPaginationData$ | async; as results){
-                <div class="flex w-full space-x-4 items-center justify-between">
+                <div class="flex w-full space-x-4 items-center justify-between flex-col-reverse lg:flex-row">
                     <app-pagination [data]="data" [baseRute]="'/blog'"/>
-                    <form [formGroup]="searchForm" (ngSubmit)="search()" class="flex items-center border p-1 rounded-lg">   
+                    <form [formGroup]="searchForm" (ngSubmit)="search()" class="flex items-center border p-1 rounded-lg mb-4 lg:mb-0">   
                         <div class="relative w-full">
                             <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full h-8 p-2"  formControlName="busqueda" />
                         </div>

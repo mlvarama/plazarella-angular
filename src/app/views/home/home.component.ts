@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../components/common/navbar/navbar.component';
 import { FooterComponent } from '../../components/common/footer/footer.component';
 import { MarginNavbarComponent } from '../../components/common/margin-navbar/margin-navbar.component';
 import { GenericButtonComponent } from '../../components/common/generic-button/generic-button.component';
 import { GeneriCardComponent } from '../../components/common/generi-card/generi-card.component';
+import { MetadataService } from '../../core/services/meta-tags-manager.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { GeneriCardComponent } from '../../components/common/generi-card/generi-
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   arrayImages: CardProps[] = [
     {
@@ -41,7 +42,13 @@ export class HomeComponent {
     },
   ];
 
+  constructor(private metaData: MetadataService){}
 
+  ngOnInit(): void {
+    this.metaData.updateMetadata({
+      title: 'Plazarella'
+    }, true);
+  }
 
 
 

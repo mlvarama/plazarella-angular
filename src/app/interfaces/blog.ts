@@ -18,3 +18,14 @@ export interface FeaturedBlog {
     imageName: string;
     categoryName: string;
 }
+
+export interface BlogDetail {
+    idPost: number;
+    title: string;
+    abstract: string;
+    body: string;
+    createdAt: string;
+    category: string;
+    image: string;
+    imageName: string;
+}

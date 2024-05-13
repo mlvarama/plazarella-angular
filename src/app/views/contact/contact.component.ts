@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BodyModule } from '../../common/body/body.module';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -6,6 +6,7 @@ import { faPhone, faMapLocationDot, faSpinner } from '@fortawesome/free-solid-sv
 import { ContactService } from '../../core/services/contact.service';
 import { ContactForm } from '../../interfaces/contact';
 import { GeneralResponse } from '../../interfaces/common';
+import { MetadataService } from '../../core/services/meta-tags-manager.service';
 
 @Component({
   selector: 'app-contact',
@@ -14,7 +15,7 @@ import { GeneralResponse } from '../../interfaces/common';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit{
 
   phoneIcon = faPhone;
   mapIcon = faMapLocationDot;
@@ -31,7 +32,13 @@ export class ContactComponent {
     message: new FormControl('', [Validators.required]),
   });
 
-  constructor(private service: ContactService){}
+  constructor(private service: ContactService, private metaData: MetadataService){}
+
+  ngOnInit(): void {
+    this.metaData.updateMetadata({
+      title: 'Contacto'
+    })
+  }
 
   async submitData(){
     const body = this.contactForm.value as ContactForm;
