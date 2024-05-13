@@ -42,19 +42,31 @@ ngOnInit(): void {
 
 }
 
+
+sliderForConfig = {
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  fade: true,
+  asNavFor: '#slider-nav'
+};
+
 slideConfig = {
-  "autoplay": true,
-  "autoplaySpeed": 1500,
-  "speed": 500,
-  "cssEase": 'linear',
-  "infinite": true,
-  "dots": true,
-  "arrows": true,
-  "slidesToShow": 1,
-  "variableWidth": true,
-  "draggable": true,
-  "pauseOnHover": false,
-  "pauseOnDotsHover": false
+  autoplay: true,
+  autoplaySpeed: 1500,
+  speed: 500,
+  cssEase: 'linear',
+  infinite: true,
+  dots: true,
+  arrows: true,
+  slidesToShow: 1,
+  variableWidth: true,
+  draggable: true,
+  pauseOnHover: false,
+  pauseOnDotsHover: false,
+  asNavFor: '#slider-for', // Usamos el ID del otro carrusel
+  focusOnSelect: true,
+  centerMode: true,
 };
 
 
@@ -76,7 +88,7 @@ image(src : string){
 
   afterChange(e) {
     if(e.currentSlide){
-      document.getElementById('mainImage').setAttribute('src', this.env + this.nameImage);
+
     }
 
   }

@@ -3,13 +3,12 @@
 <app-generic-banner [title]="'Directorio'" />
 @if(shopResults$ | async; as results){
 @if(results.success){
-<div class="flex flex-wrap my-20 items-center justify-center">
-  <div class="flex flex-wrap lg:w-2/6 w-full text-center justify-center lg:px-10 lg:pl-20 p-10">
-    <div class="w-[100%]">
-
+<div class="flex flex-wrap mt-20 ">
+  <div class="flex flex-wrap lg:w-2/6 w-full justify-center text-center lg:px-10 lg:pl-20 p-10">
+    <div >
       <h2 class="text-4xl w-full text-center font-bold uppercase">{{results.data.shop.name}}</h2>
 
-      <div class="flex flex-wrap my-5 w-full items-center text-start">
+      <div class="flex flex-wrap my-5 w-full items-center text-start ">
         <fa-icon class="text-4xl text-orange-600 mr-5" [icon]="fmark" />
         <div class="w-[80%]">
           <h6>Acerca de:</h6>
@@ -63,28 +62,37 @@
 
     </div>
   </div>
-  <div class="flex lg:flex-nowrap flex-wrap lg:w-4/6 w-full justify-center items-start relative px-20">
+  <div class="flex lg:flex-nowrap flex-wrap lg:w-4/6 w-full justify-center items-center relative lg:px-20">
     <img
-      class="lg:absolute lg:w-[20%] lg:none md:w-[30%]  w-[50%] lg:top-[15%] lg:left-[-5%] my-10 lg:my-0  bg-black shadow-black shadow-2xl hover:transition hover:duration-500 hover:shadow-2xl hover:shadow-yellow-600 "
+      class=" z-10 lg:absolute lg:w-[20%] lg:none md:w-[30%]  w-[50%] lg:top-[15%] lg:left-[-5%] my-10 lg:my-0 bg-black shadow-black shadow-2xl hover:transition hover:duration-500 hover:shadow-2xl hover:shadow-yellow-600 "
       src="{{env + results.data.shop.logo}}" alt="">
 
 
-      <img id="mainImage" class="w-auto lg:max-h-[700px] bg-black shadow-black shadow-2xl hover:transition hover:duration-500 hover:shadow-2xl hover:shadow-yellow-600"
-      src="{{env + results.data.photos[0].image}}" alt="">
+      <ngx-slick-carousel id="slider-for" class="w-full" [config]="sliderForConfig" (init)="slickInit($event)">
 
+        @for (photo of results.data.photos; track photo) {
+        <div ngxSlickItem class="flex justify-center items-center ">
+          <img
+            class="w-auto lg:max-h-[600px] max-h-[200px] md:max-h-[400px] mx-auto my-10 shadow-black shadow-lg hover:transition hover:duration-500 hover:shadow-2xl hover:shadow-yellow-600"
+            src="{{ env + photo.image }}">
+        </div>
+        }
+      </ngx-slick-carousel>
 
   </div>
-
-
 </div>
 
 <div>
-  <ngx-slick-carousel class="carousel " #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
-    (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+
+  <ngx-slick-carousel id="slider-nav" class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+    (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+    (beforeChange)="beforeChange($event)">
 
     @for (photo of results.data.photos; track photo) {
-    <div ngxSlickItem class="slide my-10 mx-5  shadow-black shadow-2xl hover:transition hover:duration-500 hover:shadow-2xl hover:shadow-yellow-600">
-      <img class=" lg:max-h-[500px] md:max-h-[350px]  max-h-[200px]" (click)="image(photo.image)" src="{{ env + photo.image }}" alt="" width="100%">
+    <div ngxSlickItem
+      class="slide my-10 mx-5  shadow-black shadow-lg hover:transition hover:duration-500 hover:shadow-2xl hover:shadow-yellow-600">
+      <img class=" lg:max-h-[500px] md:max-h-[350px]  max-h-[200px]" (click)="image(photo.image)"
+        src="{{ env + photo.image }}" alt="" width="100%">
     </div>
     }
   </ngx-slick-carousel>
