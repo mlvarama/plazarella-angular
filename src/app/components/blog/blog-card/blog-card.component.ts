@@ -4,11 +4,12 @@ import { environment } from '../../../../environments/environment.development';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { GenericButtonComponent } from '../../common/generic-button/generic-button.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-blog-card',
   standalone: true,
-  imports: [FontAwesomeModule, GenericButtonComponent],
+  imports: [FontAwesomeModule, GenericButtonComponent, RouterLink],
   templateUrl: './blog-card.component.html',
   styleUrl: './blog-card.component.css'
 })

@@ -72,6 +72,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "sslKey": "./cert/client-key.pem",
+            "sslCert": "./cert/client-cert.pem"
+          },
           "configurations": {
             "production": {
               "buildTarget": "plazarella-angular:build:production"

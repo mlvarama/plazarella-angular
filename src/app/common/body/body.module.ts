@@ -6,6 +6,7 @@ import { MarginNavbarComponent } from '../../components/common/margin-navbar/mar
 import { GenericBannerComponent } from '../../components/common/generic-banner/generic-banner.component';
 import { GenericButtonComponent } from '../../components/common/generic-button/generic-button.component';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { LoaderComponent } from '../../components/common/loader/loader.component';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     RouterLink, 
     RouterLinkActive, 
     AsyncPipe,
+    LoaderComponent,
   ],
   exports: [
     NavbarComponent,
@@ -31,6 +33,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     RouterLink, 
     RouterLinkActive, 
     AsyncPipe, 
+    LoaderComponent, 
   ]
 })
 export class BodyModule { }

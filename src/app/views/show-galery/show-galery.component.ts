@@ -39,7 +39,7 @@ export class ShowGaleryComponent implements OnInit {
         
         value.data.photos.forEach(photo => {
           const lightBoxItem: LightBoxItem = {
-            src: photo.image,
+            src: this.ENV + photo.image,
             caption: photo.name,
           }
 

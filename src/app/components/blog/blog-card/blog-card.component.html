@@ -17,12 +17,12 @@
         <div class="flex justify-center items-start flex-col w-11/12 space-y-2 mb-8">
             <div>
                 <div class="aspect-video w-full">
-                    <a class="w-full h-ful" href="">
+                    <a class="w-full h-ful" [routerLink]="['/blog', item.id, item.URL]">
                         <img src="{{ENV + item.image}}" alt=" {{item.imageName}} " class="w-full h-full object-cover rounded-lg hover:transition hover:duration-500 shadow-md shadow-slate-500 hover:shadow-lg hover:shadow-slate-500">
                     </a>
                 </div>
             </div>
-            <a href=""><h4 class="text-xl font-bold"><span class="text-[#d4a237]"> {{item.categoryName}} </span> {{item.title}} </h4></a>
+            <a [routerLink]="['/blog', item.id, item.URL]"><h4 class="text-xl font-bold"><span class="text-[#d4a237]"> {{item.categoryName}} </span> {{item.title}} </h4></a>
             <app-generic-button [textButton]="'Leer Más'" [route]="['/blog', item.id, item.URL]" />
         </div>
     }

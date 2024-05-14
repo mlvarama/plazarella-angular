@@ -30,7 +30,7 @@ export class MetadataService {
               private titleService: Title,
               private router: Router) { }
 
-  public updateMetadata(metadata: Partial<PageMetadata>, index: boolean = false): void {
+  public updateMetadata(metadata: Partial<PageMetadata>, index: boolean = true): void {
     const pageMetadata: PageMetadata = {...defaultMetadata, ...metadata};
     const metatags: MetaDefinition[] = this.generateMetaDefinitions(pageMetadata, index);
     for (const metaTag of metatags){
