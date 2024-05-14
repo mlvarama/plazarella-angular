@@ -7,7 +7,6 @@ import { DirectoryService } from '../../core/services/directory.service';
 import { environment } from '../../../environments/environment';
 import { DirectoryFrameComponent } from '../../components/directory/directory-frame/directory-frame.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { relative } from 'path';
 import { MetadataService } from '../../core/services/meta-tags-manager.service';
 
 @Component({
@@ -27,6 +26,8 @@ export class DirectoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+    this.id = params['id'];
     this.diretoryResults$ = this.service.getDirectorys(Number(this.id) ? Number(this.id) : 0).pipe(
       map(element => {
         element.data.forEach(item => {
@@ -37,7 +38,7 @@ export class DirectoryComponent implements OnInit {
         return element;
       })
     );
-
+  })
 
     this.categoriesResults$ = this.service.getBussinesActive()
 
@@ -46,11 +47,11 @@ export class DirectoryComponent implements OnInit {
     })
   }
 
-  resetPage(itemId: number) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/directorio'], { queryParams: { id: itemId }, queryParamsHandling: 'merge' });
-    });
-  }
+  // resetPage(itemId: number) {
+  //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //     this.router.navigate(['/directorio'], { queryParams: { id: itemId }, queryParamsHandling: 'merge' });
+  //   });
+  // }
 
 
 

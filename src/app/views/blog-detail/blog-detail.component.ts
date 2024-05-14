@@ -24,7 +24,7 @@ export class BlogDetailComponent implements OnInit {
   twitterIcon = faXTwitter;
   instagramIcon = faInstagram;
 
-  @Input() id = '';
+  id = '';
   showLoader: boolean;
   relatedIcon = faCircle;
   blogResponse$!: Observable<GeneralResponse<BlogDetail[]>>;
@@ -50,9 +50,9 @@ export class BlogDetailComponent implements OnInit {
           return value;
         }
       ));
-      
+
       this.featuredBlogData$ = this.service.getFeaturedBlog();
-      
+
       this.relatedBlogData$ = this.service.getRelatedBlog(Number(this.id));
     })
   }
