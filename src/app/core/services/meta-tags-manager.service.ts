@@ -19,7 +19,7 @@ const defaultMetadata: PageMetadata = {
   author: 'Plazarella',
   keywords: ['centro comercial', 'plaza', 'locales', 'cine', 'San Francisco', 'San Francisco del Rincón', 'comida'],
   type: 'website',
-  image: 'https:plazarella.com/assets/Home/PLAZARELLA.png',
+  image: 'https://plazarella.com/assets/Home/PLAZARELLA.png',
 }
 
 @Injectable({
@@ -40,7 +40,7 @@ export class MetadataService {
     this.titleService.setTitle(pageMetadata.title);
   }
 
-  private generateMetaDefinitions(metadata: PageMetadata, index): MetaDefinition[] {
+  private generateMetaDefinitions(metadata: PageMetadata, index: boolean): MetaDefinition[] {
     return [
       { name: 'title', content: metadata.title },
       { property: 'og:title', content: metadata.title },

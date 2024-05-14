@@ -1,5 +1,7 @@
 <app-navbar />
 <app-margin-navbar />
+<app-loader />
+
 @if (galeryResults$ | async;as results){
     @if(results.success){
     <app-generic-banner [title]="results.data.galery.name" />

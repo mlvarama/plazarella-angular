@@ -5,11 +5,12 @@ import { MarginNavbarComponent } from '../../components/common/margin-navbar/mar
 import { GenericButtonComponent } from '../../components/common/generic-button/generic-button.component';
 import { GeneriCardComponent } from '../../components/common/generi-card/generi-card.component';
 import { MetadataService } from '../../core/services/meta-tags-manager.service';
+import { BodyModule } from '../../common/body/body.module';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, MarginNavbarComponent, GenericButtonComponent, GeneriCardComponent],
+  imports: [BodyModule, GeneriCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

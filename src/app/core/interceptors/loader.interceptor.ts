@@ -7,5 +7,10 @@ export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   const loader = inject(LoaderService);
   
   loader.show();
-  return next(req).pipe(finalize(() => {loader.hide()}));
+  return next(req).pipe(finalize(() => {
+
+    setTimeout(()=>{
+      loader.hide();
+    }, 500);
+  }));
 };
