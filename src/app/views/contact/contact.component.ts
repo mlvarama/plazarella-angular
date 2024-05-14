@@ -48,6 +48,6 @@ export class ContactComponent implements OnInit{
     this.sent = true;
   }
 
-  
-  
+
+
 }
