@@ -4,9 +4,9 @@
         margin: 0;
     }
 </style>
-<app-loader [show]="showLoader"/>
 <app-navbar />
 <app-margin-navbar />
+<app-loader/>
 <div class="flex flex-col justify-center items-center w-full space-y-8 mb-8">
     @if (blogResponse$ | async; as results;){
         @if (results.success){

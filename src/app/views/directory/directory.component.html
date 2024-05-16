@@ -1,25 +1,45 @@
 <app-navbar />
 <app-margin-navbar />
+<app-loader />
+
 <app-generic-banner [title]="'Directorio'" />
-<div class="flex justify-center">
+
+<div class="hidden lg:flex flex-wrap justify-center">
 <!-- <a  class="text-white bg-black border border-black hover:bg-yellow-600 hover:text-white font-medium rounded-lg text-ms p-2 mx-2 my-5"
    (click)="resetPage(0)" >Mostrar Todo</a> -->
    <a  class="text-white bg-black border border-black hover:bg-yellow-600 hover:text-white font-medium rounded-lg text-ms p-2 mx-2 my-5"
-   [routerLink]="['/directorio']" [queryParams]="{id: '0'}" >Mostrar Todo</a>
+   [routerLink]="['/directorio']" >Mostrar Todo</a>
 </div>
-<div class="flex justify-center">
+<div class="hidden lg:flex flex-wrap justify-center">
 
   @if(categoriesResults$ | async; as results){
   @if(results.success){
   @for (item of results.data; track $index) {
   <!-- <button  class="text-black bg-white border border-black hover:bg-black hover:text-white font-medium rounded-lg text-ms p-2 mx-2 mb-5"
   (click)="resetPage(item.id)"  >{{item.name}}</button> -->
-  <button  class="text-black bg-white border border-black hover:bg-black hover:text-white font-medium rounded-lg text-ms p-2 mx-2 mb-5"
-  [routerLink]="['/directorio']" [queryParams]="{id: item.id}">{{item.name}}</button>
+  <a  class="text-black bg-white border border-black hover:bg-black hover:text-white font-medium rounded-lg text-ms p-2 mx-2 mb-5 "
+  [routerLink]="['/directorio']" [queryParams]="{id: item.id}">{{item.name}}</a>
   }
   }
   }
 </div>
+
+<div class="max-w-sm mx-auto flex lg:hidden p-8">
+  <label for="underline_select" class="sr-only">Underline select</label>
+  <select (change)="selectRedirect($event)" id="underline_select" class="block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer p-4">
+      <option [disabled]="true" selected>Seleccione un filtro</option>
+      <option value="{{null}}">Todos</option>
+      @if(categoriesResults$ | async; as results){
+        @if(results.success){
+          @for (item of results.data; track $index) {
+            <option value="{{item.id}}" >{{item.name}}</option>
+          }
+        }
+      }
+  </select>
+</div>
+
+
 <div class="flex justify-center items-center my-8">
 
   <div class="grid gap-4 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 max-w-screen-2xl ">

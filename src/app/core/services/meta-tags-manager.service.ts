@@ -19,7 +19,7 @@ const defaultMetadata: PageMetadata = {
   author: 'Plazarella',
   keywords: ['centro comercial', 'plaza', 'locales', 'cine', 'San Francisco', 'San Francisco del Rincón', 'comida'],
   type: 'website',
-  image: 'https:plazarella.com/assets/Home/PLAZARELLA.png',
+  image: `https://plazarella.com/assets/Home/Mesa%20de%20trabajo%2020.png`,
 }
 
 @Injectable({
@@ -40,7 +40,7 @@ export class MetadataService {
     this.titleService.setTitle(pageMetadata.title);
   }
 
-  private generateMetaDefinitions(metadata: PageMetadata, index): MetaDefinition[] {
+  private generateMetaDefinitions(metadata: PageMetadata, index: boolean): MetaDefinition[] {
     return [
       { name: 'title', content: metadata.title },
       { property: 'og:title', content: metadata.title },
@@ -56,7 +56,7 @@ export class MetadataService {
       { property: 'og:type', content: metadata.type },
 
       { property: 'og:image', content: metadata.image },
-      { property: 'og:url', content: `https://plazarella.com${this.router.url}`},
+      { property: 'og:url', content: `https://plazarella.netlify.app${this.router.url}`},
 
       { name: 'robots', content: index ? 'index, follow' : 'noindex' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

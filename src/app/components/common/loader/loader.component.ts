@@ -14,10 +14,7 @@ import { AsyncPipe } from '@angular/common';
         </div>
       </div>
     }
-  `,
-  styles: [
-    ".loaderMask{position: absolute; height: 100%; width: 100%; z-index: 100; background-color: rgba(100, 100, 100, 0.3);display: flex; align-items: center; justify-content: center; font-size: 24px;}"
-  ]
+  `
 })
 export class LoaderComponent {
   @Input() show: boolean = false;
