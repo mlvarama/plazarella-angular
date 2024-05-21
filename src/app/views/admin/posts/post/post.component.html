@@ -1,0 +1,106 @@
+<app-sidebar />
+
+<div class="flex flex-wrap lg:mx-0 mx-5 items-center justify-center lg:mt-10 pl-20 pr-10">
+  <div>
+    <div class="flex mb-10">
+
+      <h1 class="text-blue-500 text-5xl mr-10 uppercase">Posts de Blog</h1>
+      <button [routerLink]="['/admin/post/configure']"
+        class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg  rounded-lg text-lg px-28 py-3 text-center me-2 mb-2 "
+        >Agregar post</button>
+    </div>
+  </div>
+
+  <div class="relative overflow-x-auto w-full shadow-xl shadow-gray-600 sm:rounded-lg">
+    @if (error != null) {
+      <div id="alert-border-2"
+        class="flex w-full mb-5 mx-2 p-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
+        role="alert">
+        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+          viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <div class="ms-3 text-sm font-medium">
+          {{error}}
+        </div>
+      </div>
+      }
+      @else if(success != null){
+      <div
+        class="flex  p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+        role="alert">
+        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Exito</span>
+        <div>
+          <span class="font-medium">Exito!</span> {{success}}
+        </div>
+      </div>
+      }
+    <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3 bg-gray-200 dark:bg-gray-800 border-b border-black">
+            ID
+          </th>
+          <th scope="col" class="px-6 py-3 border-b border-black">
+           Titulo
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-200 dark:bg-gray-800 border-b border-gray-700">
+            URL
+          </th>
+          <th scope="col" class="px-6 py-3 border-b border-black">
+            Destacar
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-200 dark:bg-gray-800 border-b border-gray-700">
+           Estatus
+          </th>
+          <th scope="col" class="px-6 py-3 border-b border-black">
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @if(postsResults$ | async; as results){
+        @if(results.success){
+        @for (post of results.data; track $index) {
+        <tr>
+          <th scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-200 dark:text-white dark:bg-gray-800">
+           {{post.idPost}}
+          </th>
+          <td class="px-6 py-4">
+            {{post.title}}
+          </td>
+          <td class="px-6 py-4 bg-gray-200 dark:bg-gray-800">
+            {{post.URL}}
+          </td>
+          <td class="px-6 py-4">
+            {{post.featured}}
+          </td>
+          <td class="px-6 py-4 bg-gray-200 dark:bg-gray-800">
+            {{post.status}}
+          </td>
+          <td class="text-center py-3 px-6 text-sm">
+            <button
+              class="text-blue-700 hover:text-white border rounded-lg group p-2 bg-blue-100 hover:bg-blue-600">Editar</button>
+            <span class="mx-2">|</span>
+
+            <button  href="#"
+              class="text-red-900 hover:text-black border rounded-lg group p-2 bg-red-100 hover:bg-red-400">Eliminar</button>
+
+
+          </td>
+        </tr>
+        }
+        }
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>
