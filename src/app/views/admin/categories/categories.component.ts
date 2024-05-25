@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../../components/common/admin/sidebar/sidebar.component';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GeneralResponse } from '../../../interfaces/common';
 import { Categories, CategoriesId } from '../../../interfaces/admin/categories';
@@ -31,7 +31,7 @@ export class CategoriesComponent {
 
   constructor(private service: CategoriesService) {
     this.frmCategory = new FormGroup({
-      name: new FormControl(),
+      name: new FormControl('', [Validators.required]),
     })
 
     if (this.iSessionStorageAvailable) {

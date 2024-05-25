@@ -23,3 +23,38 @@ export interface status {
   name: string;
 
 }
+
+
+
+
+export interface PostId {
+  title: string;
+  URL: string;
+  abstract: string;
+  body: string;
+  statusId:Number;
+  categoryId:Number;
+  image:string;
+}
+
+
+
+export interface postEdit {
+  title: string;
+  abstract: string;
+  body: string;
+  URL: string;
+  statusId: Number;
+  categoryId: Number;
+
+}
+
+export interface imageEdit {
+  id : Number;
+  image: string;
+}
+
+export interface DataPostEdit {
+  post: postEdit;
+  image: imageEdit;
+}

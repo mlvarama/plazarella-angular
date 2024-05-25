@@ -17,6 +17,10 @@ export const ADMIN_ROUTES: Routes = [
     loadChildren: () => import('./post.routes').then(p => p.POST_ROUTES),
   },
   {
+    path: 'bussines',
+    loadChildren: () => import('./bussines.routes').then(b => b.BUSSINES_ROUTES),
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch:"full"
