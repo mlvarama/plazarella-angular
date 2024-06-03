@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BodyModule } from '../../common/body/body.module';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { GeneralResponse } from '../../interfaces/common';
 import { BlogDetail, FeaturedBlog } from '../../interfaces/blog';
 import { BlogService } from '../../core/services/blog.service';
@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment.development';
 import { BlogCardComponent } from '../../components/blog/blog-card/blog-card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircle } from '@fortawesome/free-regular-svg-icons'
-import { faFacebook, faXTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faXTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { MetadataService } from '../../core/services/meta-tags-manager.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -22,7 +22,11 @@ import { ActivatedRoute } from '@angular/router';
 export class BlogDetailComponent implements OnInit {
   facebookIcon = faFacebook;
   twitterIcon = faXTwitter;
-  instagramIcon = faInstagram;
+  whatsappIcon = faWhatsapp;
+
+  facebookShare: string = ''
+  twitterShare: string = ''
+  whatsAppShare: string = ''
 
   id = '';
   showLoader: boolean;
@@ -37,7 +41,7 @@ export class BlogDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.blogResponse$ = this.service.getBlogDetail(Number(this.id)).pipe(map(
+      this.blogResponse$ = this.service.getBlogDetail(Number(this.id)).pipe(tap(
         value => {
           this.metaTags.updateMetadata({
             title: value.data[0].title,
@@ -47,7 +51,7 @@ export class BlogDetailComponent implements OnInit {
           if (value.data[0].image.includes('(') || value.data[0].image.includes(')')){
             value.data[0].image.replaceAll('(', '\(').replaceAll(')', '\)');
           }
-          return value;
+          this.setShareURLs();
         }
       ));
 
@@ -55,5 +59,14 @@ export class BlogDetailComponent implements OnInit {
 
       this.relatedBlogData$ = this.service.getRelatedBlog(Number(this.id));
     })
+  }
+
+  setShareURLs(){
+    const url = window.location.href;
+    const urlFixed = url.replaceAll('&', '%26')
+    const urlFacebook = urlFixed.replaceAll(':', '%3A').replaceAll('/', '%2F');
+    this.facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${urlFacebook}&src=sdkpreparse`;
+    this.twitterShare = `https://twitter.com/intent/tweet?url=${urlFixed}`;
+    this.whatsAppShare = `https://api.whatsapp.com/send?text=${urlFixed}`
   }
 }
