@@ -4,6 +4,11 @@ import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
+const fs = require('fs');
+const privateKey = fs.readFileSync('../../../cert/client-key.pem', 'utf8');
+const certificate = fs.readFileSync('../../../cert/client-cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+const https = require('https');
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -48,9 +53,13 @@ function run(): void {
 
   // Start up the Node server
   const server = app();
-  server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+  const httpsServer = https.createServer(credentials, server);
+  httpsServer.listen(port, () => {
+    console.log(`HTTPS Server running on port ${port}`);
   });
+
+  
+
 }
 
 run();
