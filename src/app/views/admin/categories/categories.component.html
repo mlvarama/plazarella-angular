@@ -1,1 +1,113 @@
-<p>categories works!</p>
+<app-sidebar />
+<div class="flex flex-wrap lg:mx-0 m-5 py-5 justify-center pl-10">
+  <h1 class="text-5xl mb-10 text-blue-500 uppercase w-full text-center">Categorías</h1>
+  <div class="flex justify-center  w-full lg:w-1/3 lg:px-5">
+
+    <div class="w-full max-w-lg">
+
+      @if (error != null) {
+      <div id="alert-border-2" class="flex w-full mb-5 mx-2 p-4 text-red-800 border-t-4 border-red-300 bg-red-50"
+        role="alert">
+        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+          viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <div class="ms-3 text-sm font-medium">
+          {{error}}
+        </div>
+      </div>
+      }
+      @else if(success != null){
+      <div class="flex  p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50" role="alert">
+        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Exito</span>
+        <div>
+          <span class="font-medium">Exito!</span> {{success}}
+        </div>
+      </div>
+      }
+      <form [formGroup]="frmCategory" (ngSubmit)="categorySelected ? updateCategories() : insertCategories()">
+
+        <div class="mb-4 flex flex-wrap">
+          <label class="text-xl font-semibold text-gray-700 m-1 mx-auto mb-5" for="grid-zip">
+            {{categorySelected ? "Editar categoría":"Nueva Categoría"}}
+          </label>
+          <input formControlName="name" [ngModel]="categorySelected ? categorySelected.name : ''"
+            class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-zip" type="text" placeholder="Nombre de la categoria"
+            required>
+          @if (frmCategory.valid) {
+          <button type="submit"
+            class="mt-5 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  shadow-lg shadow-blue-500/50 rounded-lg text-lg w-full py-3 text-center mx-auto mb-2 "
+            onclick="save()">Guardar</button>
+          }
+          @else {
+          <button disabled
+            class="mt-5 text-white bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300  shadow-lg shadow-gray-500/50 rounded-lg text-lg w-full py-3 text-center mx-auto mb-2 ">Guardar</button>
+          }
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="flex justify-center   w-full lg:w-2/3 lg:px-5 ">
+    <div class="w-full lg:max-h-[800px] max-h-[450px] overflow-y-auto shadow-2xl">
+      <table class="w-full text-sm text-gray-900 border-collapse border  lg:p-5">
+        <thead class="bg-gray-100">
+          <tr>
+            <th
+              class="text-left py-3 px-6 bg-gray-100 text-base font-bold text-gray-900 uppercase border-y border-gray-400">
+              Id
+            </th>
+            <th
+              class="text-center py-3 px-6 bg-white text-base font-bold text-gray-900 uppercase border-y border-gray-400">
+              Nombre
+            </th>
+            <th
+              class="text-center py-3 px-6 bg-gray-100 text-base font-bold text-gray-900 uppercase border-y border-gray-400">
+              Estatus
+            </th>
+            <th
+              class="text-center py-3 px-6 bg-white text-base font-bold text-gray-900 uppercase border-y border-gray-400 ">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @if(categoriesResults$ | async; as results){
+          @if(results.success){
+          @for (category of results.data; track $index) {
+
+          <tr
+            [ngClass]="category.status ? 'bg-green-50 border-b border-gray-200':  'bg-grey-900 border-b border-gray-200'">
+            <td class="py-3 px-6 text-sm bg-gray-100">{{category.id}}</td>
+            <td class="text-center py-3 px-6 text-sm bg-white">{{category.name}}</td>
+            <td class="text-center py-3 px-6 text-sm bg-gray-100">{{category.status ? 'Activo' : 'Inactivo'}}</td>
+            <td class="text-center py-3 px-6 text-sm">
+              <button (click)="getCategory(category);"
+                class="text-blue-700 hover:text-white border rounded-lg group p-2 bg-blue-100 hover:bg-blue-600">Editar</button>
+              <span class="mx-2">|</span>
+              @if (category.status) {
+              <button (click)="deleteCategory(category);" href="#"
+                class="text-red-700 hover:text-white border rounded-lg group p-2 bg-red-100 hover:bg-red-600">Eliminar</button>
+              }@else {
+              <button (click)="deleteCategory(category);" href="#"
+                class="text-yellow-900 hover:text-black border rounded-lg group p-2 bg-yellow-100 hover:bg-yellow-400">Activar</button>
+              }
+
+            </td>
+          </tr>
+          }
+          }
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -42,7 +42,7 @@ export class LoginComponent {
 
     if (this.response.success) {
       sessionStorage.setItem('token', this.response.data.token);
-      this.route.navigateByUrl("admin/categories");
+      this.route.navigateByUrl("admin");
     }
   }
 
